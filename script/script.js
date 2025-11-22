@@ -56,7 +56,19 @@ for (const btn of quantityBtn) {
         console.log(currentQuantity);
         newQuantity = Math.max(0, currentQuantity+ amount);
         console.log(newQuantity);
-        document.getElementById('quantity').innerText = newQuantity
-
-    })
+        document.getElementById('quantity').innerText = newQuantity;
+    });
 }
+// ADD TO CART 
+let cartCount = 0 ;
+document.getElementById('add-to-cart').addEventListener('click',function () {
+    const checkoutContainer = document.getElementById('checkout-container');
+    const quantity = parseInt(document.getElementById('quantity').innerText);
+    if(quantity > 0){
+        checkoutContainer.classList.remove('hidden');
+        cartCount = cartCount + quantity
+    document.getElementById('cart-count').innerText = cartCount;
+    }else{
+        alert('Please select at last 1 product')
+    }
+})
