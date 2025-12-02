@@ -113,4 +113,5 @@ document.getElementById('checkout-btn').addEventListener('click',function(){
         cartContainer.appendChild(row)
     }
     cartModal.classList.remove('hidden')
-})
+});
+
