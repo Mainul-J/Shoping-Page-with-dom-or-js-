@@ -51,9 +51,9 @@ for (const btn of quantityBtn) {
     
     btn.addEventListener('click',function(event){
     const amount = event.target.innerText === '+'? 1: -1;
-    console.log(amount);
+    // console.log(amount);
         let currentQuantity = parseInt(document.getElementById ('quantity').innerText);
-        console.log(currentQuantity);
+        // console.log(currentQuantity);
         newQuantity = Math.max(0, currentQuantity+ amount);
         console.log(newQuantity);
         document.getElementById('quantity').innerText = newQuantity;
@@ -61,6 +61,7 @@ for (const btn of quantityBtn) {
 }
 // ADD TO CART 
 let cartCount = 0 ;
+let cartItems  = [];
 document.getElementById('add-to-cart').addEventListener('click',function () {
     const checkoutContainer = document.getElementById('checkout-container');
     const quantity = parseInt(document.getElementById('quantity').innerText);
@@ -68,7 +69,48 @@ document.getElementById('add-to-cart').addEventListener('click',function () {
         checkoutContainer.classList.remove('hidden');
         cartCount = cartCount + quantity
     document.getElementById('cart-count').innerText = cartCount;
+    const selectedColorButton = document.querySelector('button.border-purple-600.w-6')
+    // console.log(selectedColorButton);
+    const selectedColor = selectedColorButton.id.split('-')[0];
+    // console.log(selectedColor);
+    const selectedSizeButton  = document.querySelector('button.border-purple-600:not(.w-6)');
+    console.log(selectedSizeButton);
+    const selectedSize = selectedSizeButton.innerText.split(' ')[0];
+    console.log(selectedSize);
+    const selectedPrice = selectedSizeButton.innerText.split(' ')[1].split('$')[1]
+    // console.log(selectedPrice);
+
+        cartItems.push({
+            image:'../images/'+selectedColor+'.png',
+            title: `i don't know`,
+            color: selectedColor,
+            size:selectedSize,
+            price: quantity*parseInt(selectedPrice)
+        })
+        console.log(cartItems);
     }else{
         alert('Please select at last 1 product')
     }
+}) ;
+
+document.getElementById('checkout-btn').addEventListener('click',function(){
+    const cartModal = document.getElementById('cart-modal');
+        
+    const cartContainer = document.getElementById('cart-items');
+    console.log(cartContainer);
+    for(let i = 0 ; i<cartItems.length; i++){
+        const item = cartItems[i];
+        const row = document.createElement('tr');
+        row.classList.add('border-b');
+        row.innerHTML=`
+        <td>
+        <div class="flex items-center space-x-2">
+        <img class="h-12 w-12" src="${item.image}" alt="">
+        <span class="font-semibold">${item.title}</span>
+        </div>
+        </td>
+        `;
+        cartContainer.appendChild(row)
+    }
+    cartModal.classList.remove('hidden')
 })
