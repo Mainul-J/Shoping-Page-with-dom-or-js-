@@ -128,7 +128,8 @@ ringButton.forEach(btn => {
 
     const color = btn.id.replace("-color", "");
 
-    document.getElementById("product-image").src = "./images/" + color + ".png";
+    // GitHub Pages Safe Path
+    document.getElementById("product-image").src = "images/" + color + ".png";
   });
 });
 
@@ -169,7 +170,6 @@ document.getElementById("add-to-cart").addEventListener("click", () => {
     return;
   }
 
-  // Show checkout button
   document.getElementById("checkout-container").classList.remove("hidden");
 
   cartCount += quantity;
@@ -184,9 +184,9 @@ document.getElementById("add-to-cart").addEventListener("click", () => {
   const selectedSize = selectedSizeButton.innerText.split(" ")[0];
   const selectedPrice = selectedSizeButton.innerText.split("$")[1];
 
-  // Add to cart
+  // Add Item to Cart
   cartItems.push({
-    image: "./images/" + selectedColor + ".png",
+    image: "images/" + selectedColor + ".png",
     title: "Classy Modern Smart Watch",
     color: selectedColor,
     size: selectedSize,
@@ -200,7 +200,6 @@ document.getElementById("checkout-btn").addEventListener("click", () => {
   const cartModal = document.getElementById("cart-modal");
   const cartContainer = document.getElementById("cart-items");
 
-  // Clear previous content
   cartContainer.innerHTML = "";
 
   cartItems.forEach(item => {
